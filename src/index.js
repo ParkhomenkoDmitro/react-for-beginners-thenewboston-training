@@ -8,21 +8,21 @@ const styles = {
   textAlign: "center"
 };
 
-var Bacon = createReactClass({
+var Movie = createReactClass({
   render: function() {
     return (
       <div>
-        <h2>Test</h2>
-        <p>Bla</p>
+        <h2>{this.props.title}</h2>
+        <p>{this.props.genre}</p>
       </div>
     );
   }
 });
 render(
   <div>
-    <Bacon />
-    <Bacon />
-    <Bacon />
+    <Movie title="Avatar" genre="action" />
+    <Movie title="Non stop" genre="triller"/>
+    <Movie title="Rebbit Petric" genre="cartoon" />
   </div>,
   document.getElementById("root")
 );
