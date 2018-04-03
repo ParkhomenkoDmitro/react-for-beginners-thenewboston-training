@@ -8,21 +8,30 @@ const styles = {
   textAlign: "center"
 };
 
-var Movie = createReactClass({
+var Comment = createReactClass({
+  edit: function () {
+     alert("Editing comment "); 
+  },
+  remove: function () {
+    alert("Remoing comment ");
+  },
   render: function() {
     return (
-      <div>
-        <h2>{this.props.title}</h2>
-        <p>{this.props.genre}</p>
+      <div className="commentContainer">
+        <div className="commentText">{this.props.children}</div>
+        <button onClick={this.edit} className="button-primary">Edit</button>
+        <button onClick={this.remove} className="button-danger">Remove</button>
       </div>
-    );
+      );
   }
 });
+
+
 render(
-  <div>
-    <Movie title="Avatar" genre="action" />
-    <Movie title="Non stop" genre="triller"/>
-    <Movie title="Rebbit Petric" genre="cartoon" />
+  <div className="board">
+    <Comment>Hey now</Comment>
+    <Comment>I like you girl</Comment>
+    <Comment>Beans</Comment>
   </div>,
   document.getElementById("root")
 );
