@@ -8,19 +8,26 @@ const styles = {
   textAlign: "center"
 };
 
-var Comment = createReactClass({
-  edit: function () {
-     alert("Editing comment "); 
+var Check = createReactClass({
+
+  getInitialState: function() {
+    return {checked: true}
   },
-  remove: function () {
-    alert("Remoing comment ");
+  handleCheck: function() {
+    this.setState({ checked: !this.state.checked}); 
   },
   render: function() {
+    var msg;
+    if(this.state.checked) {
+      msg = "checked";
+    } else {
+      msg = "unchecked";
+    }
+
     return (
-      <div className="commentContainer">
-        <div className="commentText">{this.props.children}</div>
-        <button onClick={this.edit} className="button-primary">Edit</button>
-        <button onClick={this.remove} className="button-danger">Remove</button>
+      <div>
+       <input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
+       <h3>Checkob is {msg}</h3>
       </div>
       );
   }
@@ -28,10 +35,7 @@ var Comment = createReactClass({
 
 
 render(
-  <div className="board">
-    <Comment>Hey now</Comment>
-    <Comment>I like you girl</Comment>
-    <Comment>Beans</Comment>
-  </div>,
+    <Check/>  
+  ,
   document.getElementById("root")
 );
