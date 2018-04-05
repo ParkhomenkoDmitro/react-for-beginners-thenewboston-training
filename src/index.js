@@ -61,6 +61,7 @@ var Board = createReactClass({
       ]
     };
   },
+
   updateComment: function(newText, index) {
     let arr = this.state.comments;
     arr[index] = newText;
@@ -74,6 +75,7 @@ var Board = createReactClass({
   oneComment: function(textValue, index) {
     return (<Comment key={index} index={index}>{textValue}</Comment>);
   },
+
   render: function() {
     return (
       <div className="board">
