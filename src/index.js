@@ -60,6 +60,7 @@ var Board = createReactClass({
       comments: []
     };
   },
+
   updateComment: function(newText, index) {
     let arr = this.state.comments;
     arr[index] = newText;
