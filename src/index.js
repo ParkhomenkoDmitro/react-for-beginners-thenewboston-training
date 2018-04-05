@@ -17,6 +17,8 @@ var Comment = createReactClass({
     this.setState({editing: true});
   },
   save: function () {
+    let val = this.refs.newText.value;
+    console.log("Val = " + val);
     this.setState({ editing: false });
   },
   remove: function () {
@@ -25,7 +27,7 @@ var Comment = createReactClass({
   renderEditMode: function() {
     return (
       <div className="commentContainer">
-        <textarea>{this.props.children}</textarea>
+        <textarea ref="newText" defaultValue={this.props.children}></textarea>
         <button onClick={this.save} className="button-primary">Save</button>
         <button onClick={this.remove} className="button-danger">Remove</button>
       </div>
