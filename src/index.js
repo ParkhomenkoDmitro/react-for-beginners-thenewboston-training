@@ -61,13 +61,26 @@ var Board = createReactClass({
       ]
     };
   },
+
+  updateComment: function(newText, index) {
+    let arr = this.state.comments;
+    arr[index] = newText;
+    this.setState({ comments: arr });
+  },
+  removeComment: function(index) {
+    let arr = this.state.comments;
+    arr.splice(index, 1);
+    this.setState({comments: arr});
+  },
+  oneComment: function(textValue, index) {
+    return (<Comment key={index} index={index}>{textValue}</Comment>);
+  },
+
   render: function() {
     return (
       <div className="board">
         {
-          this.state.comments.map(function(textValue, index) {
-            return (<Comment key={index}>{textValue}</Comment>);
-          })
+          this.state.comments.map(this.oneComment)
         }
       </div>
     )
