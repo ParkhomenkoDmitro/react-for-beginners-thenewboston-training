@@ -8,34 +8,56 @@ const styles = {
   textAlign: "center"
 };
 
-var Check = createReactClass({
+var Comment = createReactClass({
 
   getInitialState: function() {
-    return {checked: true}
+    return {editing: false}
   },
-  handleCheck: function() {
-    this.setState({ checked: !this.state.checked}); 
+  edit: function () {
+    this.setState({editing: true});
   },
-  render: function() {
-    var msg;
-    if(this.state.checked) {
-      msg = "checked";
-    } else {
-      msg = "unchecked";
-    }
-
+  save: function () {
+    let val = this.refs.newText.value;
+    console.log("Val = " + val);
+    this.setState({ editing: false });
+  },
+  remove: function () {
+    alert("Remoing comment ");
+  },
+  renderEditMode: function() {
     return (
-      <div>
-       <input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
-       <h3>Checkob is {msg}</h3>
+      <div className="commentContainer">
+        <textarea ref="newText" defaultValue={this.props.children}></textarea>
+        <button onClick={this.save} className="button-primary">Save</button>
+        <button onClick={this.remove} className="button-danger">Remove</button>
       </div>
-      );
+    );
+  },
+  renderNormalMode: function () {
+    return (
+      <div className="commentContainer">
+        <div className="commentText">{this.props.children}</div>
+        <button onClick={this.edit} className="button-primary">Edit</button>
+        <button onClick={this.remove} className="button-danger">Remove</button>
+      </div>
+    );
+  },
+  render: function () {
+    if(this.state.editing) {
+      return this.renderEditMode();
+    } else {
+      return this.renderNormalMode();
+    }
   }
 });
 
 
 render(
-    <Check/>  
+  <div className="board">
+    <Comment>Hey now</Comment>
+    <Comment>I like you girl</Comment>
+    <Comment>Beans</Comment>
+  </div>  
   ,
   document.getElementById("root")
 );
