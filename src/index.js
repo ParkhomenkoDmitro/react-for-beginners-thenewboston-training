@@ -18,11 +18,14 @@ var Comment = createReactClass({
   },
   save: function () {
     let val = this.refs.newText.value;
-    console.log("Val = " + val);
+    //console.log("Val = " + val);
+    this.props.updateComment(val, this.props.index);
+
     this.setState({ editing: false });
   },
   remove: function () {
-    alert("Remoing comment ");
+    //alert("Remoing comment ");
+    this.props.removeComment(this.props.index);
   },
   renderEditMode: function() {
     return (
@@ -72,7 +75,9 @@ var Board = createReactClass({
     this.setState({comments: arr});
   },
   oneComment: function(textValue, index) {
-    return (<Comment key={index} index={index}>{textValue}</Comment>);
+    console.log("Comment will be created with index = " + index);
+    return (<Comment key={index} index={index} 
+    removeComment={this.removeComment} updateComment={this.updateComment}>{textValue}</Comment>);
   },
   render: function() {
     return (
