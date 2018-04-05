@@ -51,13 +51,40 @@ var Comment = createReactClass({
   }
 });
 
+var Board = createReactClass({
+  getInitialState: function() {
+    return {
+      comments: [
+        'I like eating chees',
+        'Have you ever been to Kiev?',
+        'This is enaught comments'
+      ]
+    };
+  },
 
-render(
-  <div className="board">
-    <Comment>Hey now</Comment>
-    <Comment>I like you girl</Comment>
-    <Comment>Beans</Comment>
-  </div>  
-  ,
-  document.getElementById("root")
-);
+  updateComment: function(newText, index) {
+    let arr = this.state.comments;
+    arr[index] = newText;
+    this.setState({ comments: arr });
+  },
+  removeComment: function(index) {
+    let arr = this.state.comments;
+    arr.splice(index, 1);
+    this.setState({comments: arr});
+  },
+  oneComment: function(textValue, index) {
+    return (<Comment key={index} index={index}>{textValue}</Comment>);
+  },
+
+  render: function() {
+    return (
+      <div className="board">
+        {
+          this.state.comments.map(this.oneComment)
+        }
+      </div>
+    )
+  }
+});
+
+render(<Board />, document.getElementById("root"));
